@@ -9,7 +9,7 @@ fn main() {
     for arg in &args[1..] {
         match fs::read_to_string(arg) {
             Ok(content) => {
-                utils::run_with_time_ms(|| solutions::day3::sol2(&content));
+                utils::run_benchmark(|| solutions::day5::sol(&content), 10);
             }
             Err(e) => eprintln!("Failed to read file {arg}: {e}"),
         }
