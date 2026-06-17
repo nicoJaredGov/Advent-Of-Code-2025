@@ -74,7 +74,7 @@ where
     let result = result.unwrap();
 
     println!(
-        "RESULT: {result}\n({num_iters} ITERATIONS)\tmin: {min} μs\tmax: {max} μs\tavg: {avg_elapsed} μs"
+        "Result: {result}\n({num_iters} ITERATIONS)\tmin: {min} μs\tmax: {max} μs\tavg: {avg_elapsed} μs"
     );
 }
 
