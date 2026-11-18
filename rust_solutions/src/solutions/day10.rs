@@ -1,5 +1,5 @@
 use itertools::Itertools;
-use std::collections::{HashMap, HashSet};
+use std::collections::HashSet;
 
 use crate::utils::symmetric_difference_all;
 
@@ -16,17 +16,14 @@ pub fn sol(input: &str) -> usize {
             })
             .collect();
 
-        let buttons: HashMap<usize, HashSet<usize>> = machine[1..machine.len() - 1]
+        let buttons: Vec<HashSet<usize>> = machine[1..machine.len() - 1]
             .iter()
-            .enumerate()
-            .map(|(k, button)| {
-                let button_set = to_button_set(button);
-                (k, button_set)
-            })
-            .collect();
+            .copied()
+            .map(to_button_set)
+            .collect_vec();
 
-        for combo in buttons.keys().copied().powerset() {
-            let button_combos = combo.iter().map(|k| buttons.get(k).unwrap()).collect_vec();
+        for combo in (0..buttons.len()).powerset() {
+            let button_combos = combo.iter().map(|&k| buttons.get(k).unwrap()).collect_vec();
             let result = symmetric_difference_all(&button_combos);
             if result == light_set {
                 return count + combo.len();
