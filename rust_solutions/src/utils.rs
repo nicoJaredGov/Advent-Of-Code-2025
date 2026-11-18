@@ -1,5 +1,6 @@
 use std::collections::HashSet;
 use std::fmt::Display;
+use std::hash::Hash;
 use std::io;
 use std::time::Instant;
 
@@ -92,4 +93,18 @@ pub fn draw_grid(obstacles: &HashSet<(i32, i32)>, width: i32, height: i32) {
 
         println!("{line}");
     }
+}
+
+pub fn symmetric_difference_all<T>(sets: &[&HashSet<T>]) -> HashSet<T>
+where
+    T: Eq + Hash + Clone,
+{
+    sets.iter().fold(HashSet::new(), |mut acc, &set| {
+        for item in set {
+            if !acc.remove(item) {
+                acc.insert(item.clone());
+            }
+        }
+        acc
+    })
 }

@@ -10,7 +10,7 @@ fn main() {
 
     match fs::read_to_string(path) {
         Ok(content) => {
-            utils::run_benchmark(|| solutions::day6::sol2(&content), num_iters);
+            utils::run_benchmark(|| solutions::day10::sol(&content), num_iters);
         }
         Err(e) => eprintln!("Failed to read file {path}: {e}"),
     }
